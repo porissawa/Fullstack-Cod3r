@@ -43,7 +43,7 @@ module.exports = app => {
 
             res.status(204).send()
         } catch(msg) {
-            res.status(400).send(msg)
+            return res.status(400).send(msg)
         }
     }
 
