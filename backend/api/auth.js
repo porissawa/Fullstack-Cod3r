@@ -8,9 +8,10 @@ module.exports = app => {
             return res.status(400).send('Informe usuário e senha!')
         }
 
-        const user = app.db('users')
+        const user = await app.db('users')
             .where({email: req.body.email})
             .first()
+
         if (!user) return res.status(400).send('Usuário não encontrado.')
 
         const isMatch = bcrypt.compareSync(req.body.password, user.password)
@@ -29,7 +30,25 @@ module.exports = app => {
 
         res.json({
             ...payload, 
-            token: jwt.enconde(payload, authSecret)
+            token: jwt.encode(payload, authSecret)
         })
     }
+
+    const validateToken = async (req, res) => {
+        const userData = req.body || null
+        try {
+            if(userData) {
+                const token = jwt.decode(userData.token, authSecret)
+                if(new Date(token.exp * 1000) > new Date()) { //token.exp está em segundos por causa da const now
+                    return res.send(true)
+                }
+            }
+        } catch(e) {
+            //problema no token
+        }
+
+        res.send(false)
+    }
+
+    return {signin, validateToken}
 }
