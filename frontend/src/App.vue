@@ -26,7 +26,7 @@ export default {
 <style>
 	* {
 		font-family: 'Lato', sans-serif;
-		font-weight: 100;
+		/* font-weight: 100; */
 	}
 
 	body {
