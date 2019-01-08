@@ -12,7 +12,6 @@ import router from './config/router'
 
 Vue.config.productionTip = false
 
-
 new Vue({
   store,
   router,
