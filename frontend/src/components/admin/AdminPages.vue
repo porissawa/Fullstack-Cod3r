@@ -25,7 +25,6 @@ import ArticleAdmin from './ArticleAdmin'
 import CategoryAdmin from './CategoryAdmin'
 import UserAdmin from './UserAdmin'
 
-import { mapState } from 'vuex';
 export default {
     name: 'AdminPages',
     components: {PageTitle, ArticleAdmin, CategoryAdmin, UserAdmin}
