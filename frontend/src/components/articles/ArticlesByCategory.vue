@@ -7,7 +7,7 @@
             </li>
         </ul>
         <div class="load-more">
-            <button v-if="loadMore" class="btn btn-lg btn-outline-primary" @lick="getArticles">Carregar Mais Artigos</button>
+            <button v-if="loadMore" class="btn btn-lg btn-outline-primary" @click="getArticles">Carregar Mais Artigos</button>
         </div>
     </div>
 </template>
@@ -42,6 +42,16 @@ export default {
 
                 if(res.data.length === 0) this.loadMore = false
             })
+        }
+    },
+    watch: {
+        $route(to) {
+            this.category.id = to.params.id
+            this.articles = []
+            this.page = 1
+            this.loadMore = true
+            this.getCategory()
+            this.getArticles()
         }
     },
     mounted() {
